@@ -1,0 +1,20 @@
+1.进入这个网址https://github.com/protocolbuffers/protobuf/releases
+2.下载protoc-29.6-win64.zip(点击Show all 14 assets)
+3.把protoc所在的路径加入到环境变量（C:\Development\protobuf\bin）
+上面的是用来生产proto的内容的 下面的则是rpc相关的
+4.安装go专门的依赖包go install google.golang.org/protobuf/cmd/protoc-gen-go@latest(go项目依赖项，必须在项目，这种插件是不需要的)
+
+5.下载protoc插件，这样写proto的时候会有提示,网址:https://github.com/ksprojects/protobuf-jetbrains-plugin/releases,下protobuf-jetbrains-plugin-0.13.0.zip
+6.不要解压！ 不要解压 直接打开plugs然后 install plusg from disk 把zip放进去 然后重启IDE就有了
+
+7.下载go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+
+总结:
+protoc-29.6-win64.zip(点击Show all 14 assets):proto的编译器
+go install google.golang.org/protobuf/cmd/protoc-gen-go@latest:proto编译proto文件时生成go语言代码
+go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest:proto编译proto文件时为对应的rpc内容生成代码
+
+protoc和protobuf要使用一个版本
+
+补充:本地搜索工具everything 可以替代Windos原生搜索

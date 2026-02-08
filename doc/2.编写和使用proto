@@ -1,0 +1,12 @@
+1.进入到proto目录
+2.执行protoc -I . --go_out=. helloworld.proto
+注意这个helloworld.proto要换成真实的
+注意新版本:protoc-gen-go
+要求 go_package 必须显式声明「模块外导入路径」和「本地包名」（用逗号分隔），仅写单一路径会导致路径推导失败，这是你修改后仍报错的关键。
+
+上面的是protoc+protoc-gen-go
+
+下面是protoc+protoc-gen-go+protoc-gen-grpc
+
+protoc -I . --go_out=. --go-grpc_out=. helloworld.proto
+
