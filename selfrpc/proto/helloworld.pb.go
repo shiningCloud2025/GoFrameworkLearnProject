@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v5.29.6
-// source: helloworld.proto
+// source: hello.proto
 
 package helloworld
 
