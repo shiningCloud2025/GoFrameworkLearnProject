@@ -4,12 +4,11 @@
 // 	protoc        v5.29.6
 // source: hello.proto
 
-package proto
+package proto_bak
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -22,9 +21,58 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Gender int32
+
+const (
+	Gender_MALE   Gender = 0
+	Gender_FEMALE Gender = 1
+)
+
+// Enum value maps for Gender.
+var (
+	Gender_name = map[int32]string{
+		0: "MALE",
+		1: "FEMALE",
+	}
+	Gender_value = map[string]int32{
+		"MALE":   0,
+		"FEMALE": 1,
+	}
+)
+
+func (x Gender) Enum() *Gender {
+	p := new(Gender)
+	*p = x
+	return p
+}
+
+func (x Gender) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Gender) Descriptor() protoreflect.EnumDescriptor {
+	return file_hello_proto_enumTypes[0].Descriptor()
+}
+
+func (Gender) Type() protoreflect.EnumType {
+	return &file_hello_proto_enumTypes[0]
+}
+
+func (x Gender) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Gender.Descriptor instead.
+func (Gender) EnumDescriptor() ([]byte, []int) {
+	return file_hello_proto_rawDescGZIP(), []int{0}
+}
+
 type HelloRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
+	G             Gender                 `protobuf:"varint,3,opt,name=g,proto3,enum=Gender" json:"g,omitempty"`
+	Mp            map[string]string      `protobuf:"bytes,4,rep,name=mp,proto3" json:"mp,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -66,10 +114,30 @@ func (x *HelloRequest) GetName() string {
 	return ""
 }
 
+func (x *HelloRequest) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *HelloRequest) GetG() Gender {
+	if x != nil {
+		return x.G
+	}
+	return Gender_MALE
+}
+
+func (x *HelloRequest) GetMp() map[string]string {
+	if x != nil {
+		return x.Mp
+	}
+	return nil
+}
+
 type HelloReply struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
-	Data          []*HelloReply_Result   `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -111,84 +179,28 @@ func (x *HelloReply) GetMessage() string {
 	return ""
 }
 
-func (x *HelloReply) GetData() []*HelloReply_Result {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-type HelloReply_Result struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *HelloReply_Result) Reset() {
-	*x = HelloReply_Result{}
-	mi := &file_hello_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HelloReply_Result) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HelloReply_Result) ProtoMessage() {}
-
-func (x *HelloReply_Result) ProtoReflect() protoreflect.Message {
-	mi := &file_hello_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HelloReply_Result.ProtoReflect.Descriptor instead.
-func (*HelloReply_Result) Descriptor() ([]byte, []int) {
-	return file_hello_proto_rawDescGZIP(), []int{1, 0}
-}
-
-func (x *HelloReply_Result) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *HelloReply_Result) GetUrl() string {
-	if x != nil {
-		return x.Url
-	}
-	return ""
-}
-
 var File_hello_proto protoreflect.FileDescriptor
 
 const file_hello_proto_rawDesc = "" +
 	"\n" +
-	"\vhello.proto\x1a\n" +
-	"base.proto\x1a\x1bgoogle/protobuf/empty.proto\"\"\n" +
+	"\vhello.proto\"\xa9\x01\n" +
 	"\fHelloRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"~\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x10\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\x12\x15\n" +
+	"\x01g\x18\x03 \x01(\x0e2\a.GenderR\x01g\x12%\n" +
+	"\x02mp\x18\x04 \x03(\v2\x15.HelloRequest.MpEntryR\x02mp\x1a5\n" +
+	"\aMpEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"&\n" +
 	"\n" +
 	"HelloReply\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\x12&\n" +
-	"\x04data\x18\x02 \x03(\v2\x12.HelloReply.ResultR\x04data\x1a.\n" +
-	"\x06Result\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x10\n" +
-	"\x03url\x18\x02 \x01(\tR\x03url2X\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage*\x1e\n" +
+	"\x06Gender\x12\b\n" +
+	"\x04MALE\x10\x00\x12\n" +
+	"\n" +
+	"\x06FEMALE\x10\x0121\n" +
 	"\aGreeter\x12&\n" +
-	"\bSayHello\x12\r.HelloRequest\x1a\v.HelloReply\x12%\n" +
-	"\x04Ping\x12\x16.google.protobuf.Empty\x1a\x05.PongB\n" +
-	"Z\b./;protob\x06proto3"
+	"\bSayHello\x12\r.HelloRequest\x1a\v.HelloReplyB\x0eZ\f./;proto_bakb\x06proto3"
 
 var (
 	file_hello_proto_rawDescOnce sync.Once
@@ -202,25 +214,24 @@ func file_hello_proto_rawDescGZIP() []byte {
 	return file_hello_proto_rawDescData
 }
 
+var file_hello_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_hello_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_hello_proto_goTypes = []any{
-	(*HelloRequest)(nil),      // 0: HelloRequest
-	(*HelloReply)(nil),        // 1: HelloReply
-	(*HelloReply_Result)(nil), // 2: HelloReply.Result
-	(*emptypb.Empty)(nil),     // 3: google.protobuf.Empty
-	(*Pong)(nil),              // 4: Pong
+	(Gender)(0),          // 0: Gender
+	(*HelloRequest)(nil), // 1: HelloRequest
+	(*HelloReply)(nil),   // 2: HelloReply
+	nil,                  // 3: HelloRequest.MpEntry
 }
 var file_hello_proto_depIdxs = []int32{
-	2, // 0: HelloReply.data:type_name -> HelloReply.Result
-	0, // 1: Greeter.SayHello:input_type -> HelloRequest
-	3, // 2: Greeter.Ping:input_type -> google.protobuf.Empty
-	1, // 3: Greeter.SayHello:output_type -> HelloReply
-	4, // 4: Greeter.Ping:output_type -> Pong
-	3, // [3:5] is the sub-list for method output_type
-	1, // [1:3] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // 0: HelloRequest.g:type_name -> Gender
+	3, // 1: HelloRequest.mp:type_name -> HelloRequest.MpEntry
+	1, // 2: Greeter.SayHello:input_type -> HelloRequest
+	2, // 3: Greeter.SayHello:output_type -> HelloReply
+	3, // [3:4] is the sub-list for method output_type
+	2, // [2:3] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_hello_proto_init() }
@@ -228,19 +239,19 @@ func file_hello_proto_init() {
 	if File_hello_proto != nil {
 		return
 	}
-	file_base_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_hello_proto_rawDesc), len(file_hello_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_hello_proto_goTypes,
 		DependencyIndexes: file_hello_proto_depIdxs,
+		EnumInfos:         file_hello_proto_enumTypes,
 		MessageInfos:      file_hello_proto_msgTypes,
 	}.Build()
 	File_hello_proto = out.File

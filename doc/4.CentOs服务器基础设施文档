@@ -1,0 +1,155 @@
+一.安装Docker和Docker-Compose
+1.安装依赖工具:
+yum install -y yum-utils
+2.添加 Docker 官方源
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+3.安装 Docker 核心组件
+yum install -y docker-ce docker-ce-cli containerd.io --nogpgcheck
+4.设置开机自启并启动 Docker
+systemctl enable docker --now
+
+
+这一步的问题:去境外拉的改的，改成国内阿里云
+rm -f /etc/yum.repos.d/docker-ce.repo
+
+cat > /etc/yum.repos.d/docker-ce.repo <<EOF
+[docker-ce-stable]
+name=Docker CE Stable
+baseurl=https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable
+enabled=1
+gpgcheck=0
+EOF
+
+yum makecache fast
+
+
+5.下载最新版 docker-compose
+curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+6.添加执行权限
+chmod +x /usr/local/bin/docker-compose
+7.创建软链接（确保命令全局可用）
+ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+二.使用docker、docker-compose安装Yapi和MongoDB
+1. cd /
+2.mkdir myBlog
+3.vim docker-compose.yml
+4.下载git:
+yum makecache fast
+yum install -y git
+5.下载Yapi
+git clone https://github.com/Ryan-Miao/docker-yapi.git（可以先用win下载，然后传到centos上面)
+cd docker-yapi
+docker-compose up -d
+修改原有docker
+
+新的；
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo:4
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: yapi
+    volumes:
+        - ./mongo-conf:/docker-entrypoint-initdb.d
+        - ./mongo/etc:/etc/mongo
+        - ./mongo/data/db:/data/db
+    ports:
+        - 27017:27017
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')", "-u", "root", "-p", "example", "--authenticationDatabase", "admin"]
+      interval: 2m
+      timeout: 10s
+      retries: 3
+  yapi:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: yapi
+    # 第一次启动使用
+    # command: "yapi server"
+    # 之后使用下面的命令
+    command: "node /my-yapi/vendors/server/app.js"
+    volumes:
+        - ./my-yapi:/my-yapi
+    ports:
+      - 9090:9090
+      - 3000:3000
+    depends_on:
+      - mongo
+
+
+超级镜像网站:https://docker.aityp.com/r/docker.io/library/mongo
+
+mongo由于网络问题拉不到 采取:先拉国内再改名的方案:
+1.docker pull swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/library/mongo:4.4
+2.docker tag swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/library/mongo:4.4 mongo:4
+3.验证重命名结果（能看到 mongo:4 就说明成功）
+docker images | grep mongo
+
+然后再docker-compose up -d
+
+
+还是有问题
+[+] Building 0.3s (2/2) FINISHED                                                                                                                                                                                                                               docker:default
+ => [yapi internal] load build definition from Dockerfile                                                                                                                                                                                                                0.0s
+ => => transferring dockerfile: 202B                                                                                                                                                                                                                                     0.0s
+ => ERROR [yapi internal] load metadata for docker.io/library/node:12-alpine                                                                                                                                                                                             0.2s
+------
+ > [yapi internal] load metadata for docker.io/library/node:12-alpine:
+------
+failed to solve: node:12-alpine: failed to resolve source metadata for docker.io/library/node:12-alpine: unexpected status from HEAD request to https://6n2klmit.mirror.aliyuncs.com/v2/library/node/manifests/12-alpine?ns=docker.io: 403 Forbidden
+
+
+要下ndoe
+
+
+# 拉取华为云公开的 node:12-alpine 镜像（国内秒下，无权限问题）
+docker pull swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/library/node:12-alpine-linuxarm64
+
+# 重命名为 docker.io/library/node:12-alpine（让构建时能识别）
+# 给原有镜像打上新的标签
+docker tag swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/library/node:12-alpine-linuxarm64 node:12-alpine
+
+修改:
+ yapi:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      pull_policy: never  # 新增这一行，复制粘贴即可
+    image: yapi
+    # 第一次启动使用
+    # command: "yapi server"
+    # 之后使用下面的命令
+    command: "node /my-yapi/vendors/server/app.js"
+    volumes:
+        - ./my-yapi:/my-yapi
+    ports:
+      - 9090:9090
+      - 3000:3000
+    depends_on:
+      - mongo
+~
+
+{
+  "registry-mirrors": ["https://6n2klmit.mirror.aliyuncs.com"]
+}
+
+
+# 进入 docker-yapi 目录（确保和 Dockerfile 同目录）
+cd /docker-yapi
+
+# 手动构建 yapi 镜像，命名为 yapi（和 docker-compose.yml 里的 image: yapi 一致）
+docker build -t yapi ./
+
+
+
+
+
+
+
+

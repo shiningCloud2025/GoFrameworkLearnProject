@@ -1,0 +1,4 @@
+1.项目地址:https://github.com/bufbuild/protoc-gen-validate/releases
+2.下载protoc-gen-validate_1.3.0_windows_amd64.tar.gz
+3.下载好的压缩包解压里面所有的exe到go的bin目录下
+4.拷贝https://github.com/bufbuild/protoc-gen-validate这个项目的validate包下的proto到自已的validate.proto

@@ -1,0 +1,2 @@
+导入import的前提是
+base.proto或者其他要被导入的x.proto 必须和导入这个的proto同on_packege
