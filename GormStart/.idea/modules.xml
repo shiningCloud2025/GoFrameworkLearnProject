@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GoFrameworkLearnProject.iml" filepath="$PROJECT_DIR$/.idea/GoFrameworkLearnProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/GormStart.iml" filepath="$PROJECT_DIR$/.idea/GormStart.iml" />
     </modules>
   </component>
 </project>
