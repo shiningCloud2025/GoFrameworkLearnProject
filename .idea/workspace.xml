@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="affeeeab-048f-4366-9eec-3cb65839cc1a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GinStart/chapter05/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/main.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/templates/defaults/goods.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/templates/defaults/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/templates/goods/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/templates/users/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +45,7 @@
     "Go Build.go build main.go (1).executor": "Run",
     "Go Build.go build main.go.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
