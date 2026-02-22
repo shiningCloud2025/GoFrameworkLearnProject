@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="affeeeab-048f-4366-9eec-3cb65839cc1a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/main.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/templates/defaults/goods.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/templates/defaults/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/templates/goods/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GinStart/chapter09/templates/users/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GinStart/chapter07/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/GinStart/chapter07/main.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,35 +24,37 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="39ZWcFKteEUDYti34CgCY4uNpKy" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "Go Build.go build GinStart/chapter07.executor": "Run",
-    "Go Build.go build main.go (1).executor": "Run",
-    "Go Build.go build main.go.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "master",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "C:/Users/shini/GolandProjects/GoFrameworkLearnProject/GinStart",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.configurations.included.in.services": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;Go Build.go build GinStart/chapter07.executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build main.go (1).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build main.go (2).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build main.go (3).executor&quot;: &quot;Run&quot;,
+    &quot;Go Build.go build main.go.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/shini/GolandProjects/GoFrameworkLearnProject/GinStart&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\shini\GolandProjects\GoFrameworkLearnProject\GinStart" />
@@ -69,8 +66,21 @@
         <option value="GoApplicationRunConfiguration" />
       </set>
     </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="GoApplicationRunConfiguration">
+          <value>
+            <map>
+              <entry key="go build GinStart/chapter07" value="STOPPED" />
+              <entry key="go build main.go (2)" value="STOPPED" />
+              <entry key="go build main.go (3)" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build GinStart/chapter07">
+  <component name="RunManager" selected="Go Build.go build main.go (3)">
     <configuration name="go build GinStart/chapter07" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="GoFrameworkLearnProject" />
       <working_directory value="$PROJECT_DIR$/GinStart" />
@@ -88,6 +98,22 @@
       <filePath value="$PROJECT_DIR$/GinStart/chapter06/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="go build main.go (2)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="GoFrameworkLearnProject" />
+      <working_directory value="$PROJECT_DIR$/GinStart" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/GinStart/chapter08/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go (3)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="GoFrameworkLearnProject" />
+      <working_directory value="$PROJECT_DIR$/GinStart" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/GinStart/chapter07/main.go" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="GoFrameworkLearnProject" />
       <working_directory value="$PROJECT_DIR$/GinStart" />
@@ -98,7 +124,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build main.go (3)" />
         <item itemvalue="Go Build.go build GinStart/chapter07" />
+        <item itemvalue="Go Build.go build main.go (2)" />
         <item itemvalue="Go Build.go build main.go (1)" />
         <item itemvalue="Go Build.go build main.go" />
       </list>

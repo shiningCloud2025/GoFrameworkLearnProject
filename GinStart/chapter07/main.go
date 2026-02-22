@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"reflect"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -20,16 +22,32 @@ type LoginForm struct {
 }
 
 type SignUpForm struct {
-	Age        uint8  `form:"age" json:"age" xml:"age"  binding:"gte=1,lte=130" `
+	Age        uint8  ` json:"age" xml:"age"  binding:"gte=1,lte=130" `
 	Name       string `json:"name" xml:"name" form:"name"  binding:"required,min=3"`
-	Email      string `form:"email" json:"email" xml:"email" binding:"required,email"`
-	Password   string `form:"password" json:"password" xml:"password"  binding:"required"`
-	RePassword string `form:"rePassword" json:"rePassword" xml:"rePassword"  binding:"required,eqfield=Password"` // 跨字段
+	Email      string ` json:"email" xml:"email" binding:"required,email"`
+	Password   string ` json:"password" xml:"password"  binding:"required"`
+	RePassword string ` json:"rePassword" xml:"rePassword"  binding:"required,eqfield=Password"` // 跨字段
+}
+
+func removeTopStruct(fileds map[string]string) map[string]string {
+	rsp := map[string]string{}
+	for filed, err := range fileds {
+		rsp[filed[strings.Index(filed, ".")+1:]] = err
+	}
+	return rsp
 }
 
 func InitTrans(locale string) (err error) {
 	// 修改gin框架中的validator引擎属性，实现定制
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
+		// 注册一个获取json的tag的自定义方法
+		v.RegisterTagNameFunc(func(fld reflect.StructField) string {
+			name := strings.SplitN(fld.Tag.Get("json"), ",", 2)[0]
+			if name == "-" {
+				return ""
+			}
+			return name
+		})
 		zhT := zh.New() // 中文翻译器
 		enT := en.New() // 英文翻译器
 		// 第一个参数是备用的语言环境，后面的参数是应该支持的语言环境
@@ -72,7 +90,7 @@ func main() {
 
 			}
 			fmt.Println(err.Error())
-			c.JSON(http.StatusBadRequest, gin.H{"error": errs.Translate(trans)})
+			c.JSON(http.StatusBadRequest, gin.H{"error": removeTopStruct(errs.Translate(trans))})
 			return
 		}
 
